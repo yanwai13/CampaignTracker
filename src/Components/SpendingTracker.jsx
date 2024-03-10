@@ -140,7 +140,7 @@ const SpendingTracker = () => {
                 
             </Alert>}           
  
-           <CardHeader title="Monthly Campaign Tracker"  style={{ margin: '2%' }} />  
+           <CardHeader title="Monthly Campaign Tracker"  style={{ margin: '2%', textAlign:'center' }} />  
           
             <CardContent  style={{ margin: '2%' }}>
                    <Typography variant="body2" >
