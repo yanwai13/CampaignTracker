@@ -31,6 +31,9 @@ const SpendingTracker = () => {
     const [isShownPrediction, setIsShownPrediction]= useState(false);
     const [isAutocompleteDisabled, setIsAutocompleteDisabled] = useState(false);
     useEffect(() => {
+        document.title = "Monthly Campaign Tracker by Charmarine Lo"
+     }, []);
+    useEffect(() => {
         if (listItem.length == 12) {
             setIsAutocompleteDisabled(true);
             
@@ -143,7 +146,7 @@ const SpendingTracker = () => {
                 The Total Spending is ${actualSpendingTotal}.<br/>
                 The Remaining Spending is  ${forecastTotal}.<br/>  
                 <LinearProgress variant="determinate" 
-                value={(actualSpendingTotal >= budgetSpendingTotal )? 100:actualSpendingTotal/budgetSpendingTotal *100} 
+                value={(actualSpendingTotal > budgetSpendingTotal )? 100:actualSpendingTotal/budgetSpendingTotal *100} 
                 sx={{ marginTop: '2%',  marginBottom: '2%', height: 20 }} />               
                  Forecasted average monthly spending is ${forecastTotal / (12 - actualSpendList.length)}
                 
