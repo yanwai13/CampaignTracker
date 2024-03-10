@@ -1,3 +1,7 @@
+/**Author : Charmarine LO
+ * Purpose Monthly Campaign Tracker to track and project current and future monthly spending
+ * Date : 10th March, 2024
+ */
 import React, { useState, useEffect } from 'react';
 import {
     Card,
@@ -106,7 +110,7 @@ const SpendingTracker = () => {
        
         setforecastTotal(forecastRemainingTotal);      
         setRemainingMonth(listItem.length - yearToMonthActualTotal.length);    
-        console.log(actualSpendList.length);
+       
     }
     const onMonthChange= (event, selectedOption)=>{
        
@@ -122,29 +126,41 @@ const SpendingTracker = () => {
     return (
        
       
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , backgroundColor :"#b8d8be", minHeight:'1000px'}}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , background: 'linear-gradient(to right, #ff7e5f, #feb47b)', minHeight:'1000px'}}>
       
         <Card style={{ width: '80%' ,marginTop:'2%',marginBottom:'5%'}}>
            {isShownPrediction && 
            <Alert 
             variant="filled" 
-            severity="success"
+            severity="warning"
+            sx={{ 
+                backgroundColor: 'grey',
+                color: '#fff',
+               
+              }}
             >
                
                 The Total Spending is ${actualSpendingTotal}.<br/>
                 The Remaining Spending is  ${forecastTotal}.<br/>  
                 <LinearProgress variant="determinate" 
-                value={(actualSpendingTotal >= budgetSpendingTotal )? 100:actualSpendingTotal/12} 
+                value={(actualSpendingTotal >= budgetSpendingTotal )? 100:actualSpendingTotal/budgetSpendingTotal *100} 
                 sx={{ marginTop: '2%',  marginBottom: '2%', height: 20 }} />               
                  Forecasted average monthly spending is ${forecastTotal / (12 - actualSpendList.length)}
                 
             </Alert>}           
  
-           <CardHeader title="Monthly Campaign Tracker"  style={{ margin: '2%', textAlign:'center' }} />  
+           <CardHeader title="Monthly Campaign Tracker"  
+           titleTypographyProps={{variant:'h3' }}
+           style={{ margin: '2%', textAlign:'center' , fontWeight:'bold',
+           background: 'linear-gradient(to right, #ff7e5f, #feb47b)',
+           WebkitBackgroundClip: 'text',
+           WebkitTextFillColor: 'transparent'}} />  
           
-            <CardContent  style={{ margin: '2%' }}>
-                   <Typography variant="body2" >
-                   Predict your budget by analyzing your annual budget plan to plan budget allocation
+            <CardContent  >
+                   <Typography variant="body2" style={{ textAlign:'center' , fontWeight:'bold'}} >
+                   Predict your budget by calculating how much remaining in the coming months.<br/>
+                   Input your Month, Budget and Actual Cost and <span style={{ color: '#ff7e5f' }}> Save</span> First.<br/>
+                   Forecast ready when it press <span style={{ color: '#ff7e5f' }}>Forecast</span>  or when input all 12 months data.<br/>
                    </Typography>                
             </CardContent>
             <div style={{ display: 'flex', flexDirection: 'column', margin: '2%' }}>        
@@ -165,7 +181,7 @@ const SpendingTracker = () => {
                     error={!isErrorActualPriceInput}
                     helperText={!isErrorActualPriceInput ? "Incorrect entry." : ""}
                     id="Actual"
-                    label="Actual$($0 if not known)"
+                    label="Actual$(-1 if Actual not known)"
                     defaultValue="0"
                     onChange = {handleActualPrice }   
                     style={{ flex: '1',  margin: '2%' }} 
@@ -194,13 +210,13 @@ const SpendingTracker = () => {
                 <CardActions>               
                     <Button 
                     variant="contained" 
-                    color="success"
+                    style={{ backgroundColor: '#ff7e5f', color: 'white' }} 
                     onClick={onSaveClicked}
                     > Save
                     </Button>
                     <Button 
                     variant="contained" 
-                    color="error"
+                    style={{ backgroundColor: '#feb47b', color: 'white' }} 
                     onClick={ onSubmitClicked }
                     > Forecast
                     </Button>
